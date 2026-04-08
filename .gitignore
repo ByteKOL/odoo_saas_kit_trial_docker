@@ -10,6 +10,11 @@ container_data
 _build/18.0/dkm_odoo_saas_binary
 local_scripts
 
+odoo_saas_kit/17.0/container_data
+odoo_saas_kit/18.0/container_data
+odoo_saas_kit/19.0/container_data
+odoo_saas_kit/20.0/container_data
+odoo_saas_kit/21.0/container_data
 
 # PyPI configuration file
 .pypirc
