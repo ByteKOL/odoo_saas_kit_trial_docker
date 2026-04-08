@@ -1,0 +1,39 @@
+networks:
+  defaultnet:
+    driver: bridge
+
+services:
+  db:
+    restart: unless-stopped
+    image: bytekol/odoo-psql:16
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    environment:
+      POSTGRES_USER: odoo
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: odoo
+    volumes:
+      - ./container_data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo -d postgres"]
+      interval: 1s
+      timeout: 5s
+      retries: 30
+    networks:
+      - defaultnet
+
+  odoo:
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: no
+    image: bytekol/odoo-saas-kit-trial:18.0
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    networks:
+      - defaultnet
+    ports:
+      - "8169:8069/tcp"
+      - "8172:8072/tcp"
+      - "7890:7890/tcp"
+    volumes:
+      - ./container_data/odoo:/opt/odoo/datadir
+      - ./container_data/config:/opt/odoo/config
