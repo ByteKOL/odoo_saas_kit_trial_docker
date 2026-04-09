@@ -7,7 +7,11 @@ __pycache__/
 *.pyc
 
 container_data
+_build/17.0/dkm_odoo_saas_binary
 _build/18.0/dkm_odoo_saas_binary
+_build/19.0/dkm_odoo_saas_binary
+_build/20.0/dkm_odoo_saas_binary
+_build/21.0/dkm_odoo_saas_binary
 local_scripts
 
 odoo_saas_kit/17.0/container_data
